@@ -1,5 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+
+[System.Serializable]
+public class Stroke
+{
+    public GameObject gameObject;
+    public Transform startPoint;
+    public Transform endPoint;
+    public StrokeCollider collider;
+    public GameObject StrokePreview;
+}
 public class TraceManager : MonoBehaviour
 {
     public GameObject markerPrefab;
@@ -12,57 +22,84 @@ public class TraceManager : MonoBehaviour
     private Transform endPoint;
 
     private List<Vector3> points = new List<Vector3>();
+
+    private List<Stroke> strokes = new List<Stroke>();
+    private int currentStrokeIndex = 0;
     // private bool isDrawing = false; 
     public void SetupLetter(GameObject letter)
     {
-        Transform stroke1 = letter.transform.Find("Stroke1");
-        currentStroke = stroke1.GetComponent<StrokeCollider>();
-        if (stroke1 != null )
+        strokes.Clear();  //Clear list from previous letters
+        currentStrokeIndex = 0;
+
+        foreach(Transform child in letter.transform)
         {
-            startPoint = stroke1.Find("StartPoint");
-            endPoint = stroke1.Find("EndPoint");
-
-            if (startPoint != null)
+            if (child.name.StartsWith("Stroke"))
             {
-                if(currentMarker != null)
+                Stroke s = new Stroke();
+                s.gameObject = child.gameObject;
+                s.startPoint = child.Find("StartPoint");
+                s.endPoint = child.Find("EndPoint");
+                s.collider = child.GetComponent<StrokeCollider>();
+                if (s.collider == null)
                 {
-                    Destroy(currentMarker);  //Destroy any existing markers
+                    Debug.LogError("Collider not found in " + child.name);
                 }
-
-                currentMarker = Instantiate(markerPrefab, startPoint.position, Quaternion.identity);  //Create new marker at startpoint
-
-                MarkerController controller = currentMarker.GetComponent<MarkerController>();
-                if (controller != null )
-                {
-                    controller.SetStrokeCollider(currentStroke);
-                    Transform preview = stroke1.Find("StrokePreview");
-                    if (preview != null)
-                    {
-                        controller.SetStrokePreview(preview.gameObject);
-                    }
-                }
-
-                GameObject newLine = Instantiate(linePrefab);
-                currentLine = newLine.GetComponent<LineRenderer>();
-                currentLine.sortingLayerName = "Default";
-                currentLine.sortingOrder = 5;
-                currentLine.positionCount = 0;
-                points.Clear();
-            }
-            else
-            {
-                Debug.Log("StartPoint not found.");
-            }
-
-            if (endPoint == null)
-            {
-                Debug.Log("EndPoint not found");
+                s.StrokePreview = child.Find("StrokePreview")?.gameObject;
+                strokes.Add(s);
             }
         }
-        else
+
+        foreach(Stroke s in strokes)
         {
-            Debug.Log("Stroke1 not found in letter prefab");
+            s.gameObject.SetActive(false);
         }
+
+        if(strokes.Count > 0)
+        {
+            StartStroke(0);
+        }
+    }
+
+    private void StartStroke(int index)
+    {
+        if(index>0 && index -1 < strokes.Count)
+        {
+            strokes[index-1].gameObject.SetActive(false) ;
+        }
+        if (index >= strokes.Count)
+        {
+            Debug.Log("All strokes complete!");
+            return;
+        }
+
+        Stroke current = strokes[index];
+        current.gameObject.SetActive(true);
+
+        currentStroke = current.collider;
+        startPoint = current.startPoint;
+       
+        endPoint = current.endPoint;
+
+        if (currentMarker!=null)
+        {
+            Destroy(currentMarker);
+        }
+
+        currentMarker = Instantiate(markerPrefab, startPoint.position, Quaternion.identity);
+        MarkerController controller = currentMarker.GetComponent<MarkerController>();
+        if(controller!= null)
+        {
+            controller.SetStrokeCollider(currentStroke);
+            controller.SetStrokePreview(current.StrokePreview);
+        }
+
+        GameObject newLine = Instantiate(linePrefab);
+        currentLine = newLine.GetComponent<LineRenderer>();
+        currentLine.sortingLayerName = "Default";
+        currentLine.sortingOrder = 3;
+
+        currentLine.positionCount = 0;
+        points.Clear();
     }
 
     void Update()
@@ -92,9 +129,12 @@ public class TraceManager : MonoBehaviour
 
         if (Vector3.Distance(markerPos, endPoint.position) < 0.3f)
         {
-            Debug.Log("stroke Complete!"); 
+            Debug.Log("stroke Complete!");
 
             // isDrawing = false;
+
+            currentStrokeIndex++;
+            StartStroke(currentStrokeIndex);
         }
     }
 }
