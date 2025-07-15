@@ -1,17 +1,22 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class TraceManager : MonoBehaviour
 {
     public GameObject markerPrefab;
+    public GameObject linePrefab;
 
     private GameObject currentMarker;
+    private LineRenderer currentLine;
+    private StrokeCollider currentStroke;
     private Transform startPoint;
     private Transform endPoint;
 
+    private List<Vector3> points = new List<Vector3>();
+    // private bool isDrawing = false; can be used later for adding effects and stuff maybe 
     public void SetupLetter(GameObject letter)
     {
         Transform stroke1 = letter.transform.Find("Stroke1");
-
+        currentStroke = stroke1.GetComponent<StrokeCollider>();
         if (stroke1 != null )
         {
             startPoint = stroke1.Find("StartPoint");
@@ -25,6 +30,17 @@ public class TraceManager : MonoBehaviour
                 }
 
                 currentMarker = Instantiate(markerPrefab, startPoint.position, Quaternion.identity);  //Create new marker at startpoint
+
+                MarkerController controller = currentMarker.GetComponent<MarkerController>();
+                if (controller != null )
+                {
+                    controller.SetStrokeCollider(currentStroke);
+                }
+
+                GameObject newLine = Instantiate(linePrefab);
+                currentLine = newLine.GetComponent<LineRenderer>();
+                currentLine.positionCount = 0;
+                points.Clear();
             }
             else
             {
@@ -44,13 +60,34 @@ public class TraceManager : MonoBehaviour
 
     void Update()
     {
-        if (currentMarker != null && endPoint != null)
+        if (currentMarker == null || currentStroke == null) return; 
+        Vector3 markerPos = currentMarker.transform.position;
+        Vector2 marker2D = new Vector2 (markerPos.x, markerPos.y);
+
+        if(currentStroke.IsInside(marker2D))
         {
-            float distance = Vector3.Distance(currentMarker.transform.position, endPoint.position);
-            if (distance < 0.3f)  //Check if marker has reached the end point
+            // isDrawing = true;
+
+            if (points.Count == 0 || Vector3.Distance(points[points.Count - 1], markerPos) > 0.02f) //  Add to list only if it is far enough
             {
-                Debug.Log("Stroke complete!");  //Add more functionality maybe create a loop to get through other strokes
+                if (currentStroke.IsInside(marker2D))
+                {
+                    points.Add(markerPos);
+                    currentLine.positionCount = points.Count;
+                    currentLine.SetPosition(points.Count - 1, markerPos);
+                }
             }
-        } 
+        }
+        else
+        {
+            // isDrawing = false;
+        }
+
+        if (Vector3.Distance(markerPos, endPoint.position) < 0.3f)
+        {
+            Debug.Log("stroke Complete!"); //  Placeholder
+
+            // isDrawing = false;
+        }
     }
 }
