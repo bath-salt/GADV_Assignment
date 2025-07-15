@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206349917251953959}
   - component: {fileID: 1198441372517978271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arrowhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2186193598555186382}
   - component: {fileID: 702059704738112590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LetterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -8680797543115379092, guid: ef1880f6bb9b4fe4d91907d6e3c4abd6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5995352058572819510}
   - component: {fileID: 7308053016891646298}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 655619132828685033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4404689122466980008}
   - component: {fileID: 6362623386121258661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7384466738992728410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StrokePreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5482697274416253534}
   - component: {fileID: 5642141338601472853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2350935152597152626}
   - component: {fileID: 2925136205409811659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9042430020400117874}
   - component: {fileID: 8727910599138063965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7213119916856758240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stroke2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3310414798425887670}
   - component: {fileID: 6814270376411467533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6464981029282746484}
   - component: {fileID: 1325677903674481365}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3232951899987357733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StrokePreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1397659452319942071}
   - component: {fileID: 6792277900931788888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4117952325886765017}
   - component: {fileID: 1672162586709886936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arrowhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910972377025277124}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LetterGroup_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 4351824784457068306}
   - component: {fileID: 2934094770075469406}
   - component: {fileID: 590083789901308843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stroke1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1252,7 +1252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2903539505170882397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,7 +1284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 382134281442608128}
   - component: {fileID: 6789378221357705669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8201765600790383146}
   - component: {fileID: 6461657267133436937}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1458,7 +1458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3031540271877998471}
   - component: {fileID: 7114569004251913319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1545,7 +1545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7460669745388177425}
   - component: {fileID: 6813744223733641395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dot6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

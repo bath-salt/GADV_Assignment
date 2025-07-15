@@ -12,7 +12,7 @@ public class TraceManager : MonoBehaviour
     private Transform endPoint;
 
     private List<Vector3> points = new List<Vector3>();
-    // private bool isDrawing = false; can be used later for adding effects and stuff maybe 
+    // private bool isDrawing = false; 
     public void SetupLetter(GameObject letter)
     {
         Transform stroke1 = letter.transform.Find("Stroke1");
@@ -35,10 +35,17 @@ public class TraceManager : MonoBehaviour
                 if (controller != null )
                 {
                     controller.SetStrokeCollider(currentStroke);
+                    Transform preview = stroke1.Find("StrokePreview");
+                    if (preview != null)
+                    {
+                        controller.SetStrokePreview(preview.gameObject);
+                    }
                 }
 
                 GameObject newLine = Instantiate(linePrefab);
                 currentLine = newLine.GetComponent<LineRenderer>();
+                currentLine.sortingLayerName = "Default";
+                currentLine.sortingOrder = 5;
                 currentLine.positionCount = 0;
                 points.Clear();
             }
@@ -85,7 +92,7 @@ public class TraceManager : MonoBehaviour
 
         if (Vector3.Distance(markerPos, endPoint.position) < 0.3f)
         {
-            Debug.Log("stroke Complete!"); //  Placeholder
+            Debug.Log("stroke Complete!"); 
 
             // isDrawing = false;
         }

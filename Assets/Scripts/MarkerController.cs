@@ -1,16 +1,32 @@
+using System.ComponentModel.Design.Serialization;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MarkerController : MonoBehaviour
 {
     private StrokeCollider strokeCollider;
+
+    private GameObject strokePreview;
     private Camera cam;
     private Vector3 dragOffset = Vector3.zero;
 
     private bool isDragging = false;
+    private bool hasMoved = false;
+    private float lastMoveTime = 0f;
+    private float idleThreshhold = 5f;
 
     void Start()
     {
         cam = Camera.main;
+    }
+
+    public void SetStrokePreview(GameObject preview)
+    {
+        strokePreview = preview;
+        if (strokePreview != null)
+        {
+            strokePreview.SetActive(true);  // always start visible
+        }
     }
 
     public void SetStrokeCollider(StrokeCollider stroke)
@@ -54,7 +70,18 @@ public class MarkerController : MonoBehaviour
                     if(isInside && hasRoom)
                     {
                         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);  // so marker does not teleport when you drag out of bounds and back in again
-                        Debug.Log("Marker Moved");
+                        //Debug.Log("Marker Moved");
+
+                        if (!hasMoved)
+                        {
+                            hasMoved = true;
+                            if(strokePreview != null && strokePreview.activeSelf)
+                            {
+                                strokePreview.SetActive(false);
+                                Debug.Log("hiding preview");
+                                lastMoveTime = Time.time;
+                            }
+                        }
                     }
                 }
             }
@@ -63,6 +90,15 @@ public class MarkerController : MonoBehaviour
             {
                 isDragging = false;
             }
-        }    
+        }
+
+        if (hasMoved && strokePreview != null && !strokePreview.activeSelf)
+        {
+            if (Time.time - lastMoveTime >= idleThreshhold)
+            {
+                strokePreview.SetActive(true);
+                Debug.Log("Marker idle- showing preview again");
+            }
+        }
     }
 }
