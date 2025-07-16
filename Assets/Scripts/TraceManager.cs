@@ -79,6 +79,12 @@ public class TraceManager : MonoBehaviour
         startPoint = current.startPoint;
        
         endPoint = current.endPoint;
+        EndPointCheck trigger = endPoint.GetComponent<EndPointCheck>();
+        if (trigger != null)
+        {
+            trigger.traceManager = this;
+        }
+
 
         if (currentMarker!=null)
         {
@@ -86,6 +92,7 @@ public class TraceManager : MonoBehaviour
         }
 
         currentMarker = Instantiate(markerPrefab, startPoint.position, Quaternion.identity);
+        //currentMarker.tag = "Marker";
         MarkerController controller = currentMarker.GetComponent<MarkerController>();
         if(controller!= null)
         {
@@ -97,9 +104,18 @@ public class TraceManager : MonoBehaviour
         currentLine = newLine.GetComponent<LineRenderer>();
         currentLine.sortingLayerName = "Default";
         currentLine.sortingOrder = 3;
-
+        currentLine.startWidth = 0.75f;
+        currentLine.endWidth = 0.75f;
+        currentLine.numCapVertices = 10;
         currentLine.positionCount = 0;
         points.Clear();
+    }
+
+    public void OnStrokeComplete()
+    {
+        Debug.Log("Stroke Complete");
+        currentStrokeIndex++;
+        StartStroke(currentStrokeIndex);
     }
 
     void Update()
@@ -122,19 +138,8 @@ public class TraceManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            // isDrawing = false;
-        }
+        
 
-        if (Vector3.Distance(markerPos, endPoint.position) < 0.3f)
-        {
-            Debug.Log("stroke Complete!");
-
-            // isDrawing = false;
-
-            currentStrokeIndex++;
-            StartStroke(currentStrokeIndex);
-        }
+       
     }
 }
