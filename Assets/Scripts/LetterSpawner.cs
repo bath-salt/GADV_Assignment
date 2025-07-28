@@ -22,6 +22,6 @@ public class LetterSpawner : MonoBehaviour
 
     void Start()
     {
-        LoadLetter(0);  //  CHANGE LATER FOR THE WORD THING
+        LoadLetter(1);  //  CHANGE LATER FOR THE WORD THING
     }
 }

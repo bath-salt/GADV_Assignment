@@ -13,7 +13,7 @@ public class MarkerController : MonoBehaviour
     private bool isDragging = false;
     private bool hasMoved = false;
     private float lastMoveTime = 0f;
-    private float idleThreshhold = 5f;
+    private float idleThreshhold = 10f;
 
     void Start()
     {

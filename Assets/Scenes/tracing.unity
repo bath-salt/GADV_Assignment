@@ -326,7 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letterPrefabs:
-  - {fileID: 5434361698674026314, guid: a952cc214737d8f44b6f58e4c26dd900, type: 3}
+  - {fileID: 3732671452401569878, guid: 146158e665258004896b6371d6b031d7, type: 3}
+  - {fileID: 8640069530019848741, guid: 090e14869728df54d93c1d8908dfb8ca, type: 3}
   TraceManager: {fileID: 376587351}
   spawnLocation: {fileID: 1298887109}
 --- !u!1 &1425905652
