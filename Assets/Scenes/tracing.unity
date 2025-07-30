@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 1298887109}
   - component: {fileID: 1298887110}
   m_Layer: 0
-  m_Name: LetterManager
+  m_Name: LetterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,6 +328,10 @@ MonoBehaviour:
   letterPrefabs:
   - {fileID: 3732671452401569878, guid: 146158e665258004896b6371d6b031d7, type: 3}
   - {fileID: 8640069530019848741, guid: 090e14869728df54d93c1d8908dfb8ca, type: 3}
+  - {fileID: 5808807377383730575, guid: 0ee94e1e8cfc6ce45bce418da9a2b4a0, type: 3}
+  - {fileID: 4524089824804271048, guid: 3aa268f5de9016e47815675ab046f8fc, type: 3}
+  - {fileID: 7022662435626122225, guid: 8294765a4eae0db4d93afe0e34536039, type: 3}
+  - {fileID: 2463500772976780813, guid: d6dd479daeaf24d46b26c1563e2d2eca, type: 3}
   TraceManager: {fileID: 376587351}
   spawnLocation: {fileID: 1298887109}
 --- !u!1 &1425905652

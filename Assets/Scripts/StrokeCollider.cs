@@ -16,4 +16,5 @@ public class StrokeCollider : MonoBehaviour
     {
         return strokeArea != null && strokeArea.OverlapPoint(point);
     }
+
 }

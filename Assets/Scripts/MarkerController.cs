@@ -44,7 +44,7 @@ public class MarkerController : MonoBehaviour
 
             Vector2 touch2D = new Vector2(touchWorldPos.x, touchWorldPos.y);
 
-            if(touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began)
             {
                 Collider2D hit = Physics2D.OverlapPoint(touch2D);
                 if (hit != null && hit.transform == transform)
@@ -52,13 +52,13 @@ public class MarkerController : MonoBehaviour
                     isDragging = true;
                     dragOffset = transform.position - touchWorldPos;
                 }
-                
+
             }
 
-            if(isDragging && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary))
+            if (isDragging && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary))
             {
                 Vector3 targetPosition = touchWorldPos + dragOffset;
-                if(strokeCollider !=null)
+                if (strokeCollider != null)
                 {
                     Vector2 target2D = new Vector2(targetPosition.x, targetPosition.y);
                     float buffer = 0.2f;
@@ -67,7 +67,7 @@ public class MarkerController : MonoBehaviour
                        strokeCollider.IsInside(new Vector2(touch2D.x - buffer, touch2D.y)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y + buffer)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y - buffer));
-                    if(isInside && hasRoom)
+                    if (isInside && hasRoom)
                     {
                         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);  // so marker does not teleport when you drag out of bounds and back in again
                         //Debug.Log("Marker Moved");
@@ -75,7 +75,7 @@ public class MarkerController : MonoBehaviour
                         if (!hasMoved)
                         {
                             hasMoved = true;
-                            if(strokePreview != null && strokePreview.activeSelf)
+                            if (strokePreview != null && strokePreview.activeSelf)
                             {
                                 strokePreview.SetActive(false);
                                 Debug.Log("hiding preview");
@@ -86,7 +86,7 @@ public class MarkerController : MonoBehaviour
                 }
             }
 
-            if(touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 isDragging = false;
             }
