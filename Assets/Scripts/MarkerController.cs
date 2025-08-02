@@ -47,6 +47,14 @@ public class MarkerController : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 Collider2D hit = Physics2D.OverlapPoint(touch2D);
+                if(hit != null)
+                {
+                    Debug.Log($"Touched: {hit.name}");
+                }
+                else
+                {
+                    Debug.Log("hit nothing");
+                }
                 if (hit != null && hit.transform == transform)
                 {
                     isDragging = true;
@@ -67,6 +75,13 @@ public class MarkerController : MonoBehaviour
                        strokeCollider.IsInside(new Vector2(touch2D.x - buffer, touch2D.y)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y + buffer)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y - buffer));
+                    //if (!isInside)
+                    //{
+                    //    Debug.Log("Touch moved outside stroke bounds. Stopping drag.");
+                    //    isDragging = false;
+                    //    return;
+                    //}
+
                     if (isInside && hasRoom)
                     {
                         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);  // so marker does not teleport when you drag out of bounds and back in again
@@ -89,7 +104,9 @@ public class MarkerController : MonoBehaviour
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 isDragging = false;
+                Debug.Log("Touch ended");
             }
+
         }
 
         if (hasMoved && strokePreview != null && !strokePreview.activeSelf)

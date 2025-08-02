@@ -91,8 +91,10 @@ public class TraceManager : MonoBehaviour
             Destroy(currentMarker);
         }
 
-        currentMarker = Instantiate(markerPrefab, startPoint.position, Quaternion.identity);
-        //currentMarker.tag = "Marker";
+        Vector3 spawnPos = startPoint.position;
+        spawnPos.z = -1.0f;  // avoid pressing the stroke instead of marker
+        currentMarker = Instantiate(markerPrefab, spawnPos, Quaternion.identity);
+        
         MarkerController controller = currentMarker.GetComponent<MarkerController>();
         if(controller!= null)
         {
@@ -101,6 +103,7 @@ public class TraceManager : MonoBehaviour
         }
 
         GameObject newLine = Instantiate(linePrefab);
+        newLine.transform.position = new Vector3(0, 0, 0.5f);  // ensure line is below the letter image
         currentLine = newLine.GetComponent<LineRenderer>();
         currentLine.sortingLayerName = "Default";
         currentLine.sortingOrder = 3;
@@ -122,6 +125,7 @@ public class TraceManager : MonoBehaviour
     {
         if (currentMarker == null || currentStroke == null) return; 
         Vector3 markerPos = currentMarker.transform.position;
+        markerPos.z = 0.5f;
         Vector2 marker2D = new Vector2 (markerPos.x, markerPos.y);
 
         if(currentStroke.IsInside(marker2D))

@@ -8,7 +8,6 @@ public class EndPointCheck : MonoBehaviour
     {
         if (other.CompareTag("Marker"))
         {
-            Debug.Log("TEST1");
             traceManager.OnStrokeComplete();
         }
     }
