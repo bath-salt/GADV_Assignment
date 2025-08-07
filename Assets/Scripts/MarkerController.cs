@@ -75,12 +75,6 @@ public class MarkerController : MonoBehaviour
                        strokeCollider.IsInside(new Vector2(touch2D.x - buffer, touch2D.y)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y + buffer)) &&
                        strokeCollider.IsInside(new Vector2(touch2D.x, touch2D.y - buffer));
-                    //if (!isInside)
-                    //{
-                    //    Debug.Log("Touch moved outside stroke bounds. Stopping drag.");
-                    //    isDragging = false;
-                    //    return;
-                    //}
 
                     if (isInside && hasRoom)
                     {

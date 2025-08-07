@@ -11,9 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: ea7687a666db77f40b31398d25960037
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/monster.unity
     guid: 389538ee8c81ced4589561901ce6d576
+  - enabled: 1
+    path: Assets/Scenes/MonsterRequests.unity
+    guid: 492adce2950dcd245a2134cc057c14d6
+  - enabled: 1
+    path: Assets/Scenes/tracing.unity
+    guid: c5275f99cbcde9f49bb502d782682a08
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

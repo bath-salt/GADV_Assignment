@@ -14,6 +14,8 @@ public class TraceManager : MonoBehaviour
 {
     public GameObject markerPrefab;
     public GameObject linePrefab;
+    public LetterSpawner LetterSpawner;
+    private List<GameObject> drawnLines = new List<GameObject>();
 
     private GameObject currentMarker;
     private LineRenderer currentLine;
@@ -60,15 +62,29 @@ public class TraceManager : MonoBehaviour
         }
     }
 
-    private void StartStroke(int index)
+    public void StartStroke(int index)
     {
-        if(index>0 && index -1 < strokes.Count)
+        if(index>0 && (index -1) < strokes.Count)
         {
             strokes[index-1].gameObject.SetActive(false) ;
         }
         if (index >= strokes.Count)
         {
             Debug.Log("All strokes complete!");
+            if(currentMarker != null)
+            {
+                Destroy(currentMarker);
+            }
+
+            if(currentLine != null)
+            {
+                Destroy(currentLine.gameObject);
+            }
+
+            if (LetterSpawner != null)
+            {
+                LetterSpawner.OnLetterComplete();
+            }
             return;
         }
 
@@ -112,6 +128,8 @@ public class TraceManager : MonoBehaviour
         currentLine.numCapVertices = 10;
         currentLine.positionCount = 0;
         points.Clear();
+
+        drawnLines.Add(newLine);
     }
 
     public void OnStrokeComplete()
@@ -119,6 +137,24 @@ public class TraceManager : MonoBehaviour
         Debug.Log("Stroke Complete");
         currentStrokeIndex++;
         StartStroke(currentStrokeIndex);
+    }
+
+    public void ClearDrawing()
+    {
+        if(currentMarker != null)
+        {
+            Destroy(currentMarker);
+        }
+
+        foreach(GameObject line in drawnLines)
+        {
+            if (line != null)
+            {
+                Destroy(line);
+            }
+        }
+
+        drawnLines.Clear(); 
     }
 
     void Update()
