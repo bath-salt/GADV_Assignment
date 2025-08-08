@@ -32,24 +32,18 @@ public class MonsterSceneFlow : MonoBehaviour
         spawnedDeliveredItem = Instantiate(GameSession.SelectedWordPrefab, itemBesideMonster.position, Quaternion.identity, itemBesideMonster);
 
         manager.ShowSpeech("អរគុណ");
-        yield return new WaitForSeconds(1f);
-        AttachItemToMonster(spawnedDeliveredItem.transform, monsterWalk.carryPoint);
+        yield return new WaitForSeconds(4f);
 
-        manager.requestBubble.SetActive(false);
+        if (spawnedDeliveredItem != null)
+        {
+            Destroy(spawnedDeliveredItem);
+        }
+
+        manager.HideSpeech();
         yield return StartCoroutine(monsterWalk.WalkOut());
+        
 
         if (spawnedDeliveredItem != null) Destroy(spawnedDeliveredItem);
 
-    }
-
-    void AttachItemToMonster(Transform item, Transform carryPoint)
-    {
-        if (item == null || carryPoint == null) return;
-
-        item.SetParent(carryPoint, worldPositionStays:true);
-        item.position = carryPoint.position;
-        item.rotation = carryPoint.rotation;
-        item.localScale = Vector3.one;
-        
     }
 }

@@ -36,4 +36,10 @@ public class UIManager : MonoBehaviour
         if (requestBubble != null) requestBubble.SetActive(true);
         if (speechText != null) speechText.text = message;
     }
+
+    public void HideSpeech()
+    {
+        if(requestBubble != null) requestBubble.SetActive(false);
+        if(speechText != null) speechText.gameObject.SetActive(false);
+    }
 }

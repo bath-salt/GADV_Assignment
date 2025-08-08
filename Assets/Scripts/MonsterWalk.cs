@@ -9,7 +9,7 @@ public class MonsterWalk : MonoBehaviour
     public float pauseBeforeRequest = 0.4f;
     public MonsterRequest monsterRequest;
     public Animator animator;
-    public Transform carryPoint;
+
 
     public IEnumerator WalkIn()
     {
