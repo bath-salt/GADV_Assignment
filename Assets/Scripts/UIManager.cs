@@ -3,15 +3,21 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public SpriteRenderer requestRenderer;
+    private GameObject currentRequestImage;
+    public GameObject requestBubble;
     public GameObject feedbackPanel;
     public TextMeshPro feedbackText; 
     public MonsterRequest monsterRequest;
-    public void ShowMonsterRequest(Sprite image)
+    public TextMeshPro speechText;
+    public void ShowMonsterRequest(GameObject prefabToSpawn)
     {
-        requestRenderer.sprite = image;   
-        requestRenderer.gameObject.SetActive(true);
-        feedbackPanel.SetActive(false);
+        if(currentRequestImage != null)
+        {
+            Destroy(currentRequestImage);
+        }
+
+        currentRequestImage = Instantiate(prefabToSpawn);
+        requestBubble.SetActive(true);
     }  
     
     public void ShowFeedback(bool isCorrect)
@@ -23,5 +29,11 @@ public class UIManager : MonoBehaviour
     public void OnCategoryButtonClicked(string category)
     {
         monsterRequest.OnCategoryChosen(category);
+    }
+
+    public void ShowSpeech(string message)
+    {
+        if (requestBubble != null) requestBubble.SetActive(true);
+        if (speechText != null) speechText.text = message;
     }
 }

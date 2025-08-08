@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LetterSpawner : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LetterSpawner : MonoBehaviour
 
     private string currentWord = "CAT";
     private int currentLetterIndex = 0;
+    private bool wordCompleted = false;
 
     public void StartWord(string word)
     {
@@ -32,7 +34,13 @@ public class LetterSpawner : MonoBehaviour
 
         if (currentLetterIndex >= currentWord.Length)
         {
-            Debug.Log("WORD COMPLETE");
+            if(!wordCompleted)
+            {
+                wordCompleted = true;
+                GameSession.Score += 1;
+                GameSession.JustDelivered = true;
+                Invoke(nameof(ReturnToMonsterScene), 0.75f);
+            }
             return;
         }
 
@@ -56,6 +64,10 @@ public class LetterSpawner : MonoBehaviour
         LoadNextLetter() ;
     }
 
+    private void ReturnToMonsterScene()
+    {
+        SceneManager.LoadScene("MonsterRequests");
+    }
     void Start()
     {
         StartWord(GameSession.SelectedWord);  //  CHANGE LATER FOR DYNAMIC LOADING
