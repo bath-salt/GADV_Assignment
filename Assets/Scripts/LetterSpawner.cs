@@ -5,6 +5,7 @@ public class LetterSpawner : MonoBehaviour
 {
     public GameObject[] letterPrefabs;
     public TraceManager TraceManager;
+    public TracingUIManager TracingUIManager;
     public Transform spawnLocation;
 
     private GameObject currentLetter;
@@ -38,8 +39,13 @@ public class LetterSpawner : MonoBehaviour
             {
                 wordCompleted = true;
                 GameSession.Score += 1;
+
+                var km = TracingUIManager.GetKhmerTranslation(GameSession.SelectedWord);
+                Debug.Log(km);
+                TracingUIManager.ShowCompletionPanel(GameSession.SelectedWord, km);
+
                 GameSession.JustDelivered = true;
-                Invoke(nameof(ReturnToMonsterScene), 0.75f);
+                Invoke(nameof(ReturnToMonsterScene), 3f);
             }
             return;
         }
