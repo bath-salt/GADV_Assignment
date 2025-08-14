@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public void ShowFeedback(bool isCorrect)
     {
         feedbackPanel.SetActive(true);
-        feedbackText.text = isCorrect ? "Correct! Let's Begin tracing!" : "Oops! try again";
+        feedbackText.text = isCorrect ? "នោះ​គឺ​ត្រឹមត្រូវ!" : "ឱ! ព្យាយាមម្តងទៀត";
     }
 
     public void OnCategoryButtonClicked(string category)

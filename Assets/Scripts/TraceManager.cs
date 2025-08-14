@@ -119,7 +119,7 @@ public class TraceManager : MonoBehaviour
         }
 
         GameObject newLine = Instantiate(linePrefab);
-        newLine.transform.position = new Vector3(0, 0, 0.5f);  // ensure line is below the letter image
+        newLine.transform.position = new Vector3(0, 0, 0.5f);  
         currentLine = newLine.GetComponent<LineRenderer>();
         currentLine.sortingLayerName = "Default";
         currentLine.sortingOrder = 3;
@@ -166,7 +166,7 @@ public class TraceManager : MonoBehaviour
 
         if(currentStroke.IsInside(marker2D))
         {
-            // isDrawing = true;
+
 
             if (points.Count == 0 || Vector3.Distance(points[points.Count - 1], markerPos) > 0.02f) //  Add to list only if it is far enough
             {

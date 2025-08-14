@@ -7,6 +7,8 @@ public class CategoryButton : MonoBehaviour
 
     private void Update()
     {
+        if (GameSession.InputLocked) return;
+
         if(Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

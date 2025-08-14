@@ -7,7 +7,7 @@ public class LetterSpawner : MonoBehaviour
     public TraceManager TraceManager;
     public TracingUIManager TracingUIManager;
     public Transform spawnLocation;
-
+    public TracingDisplay TracingDisplay;
     private GameObject currentLetter;
 
     private string currentWord = "CAT";
@@ -38,10 +38,16 @@ public class LetterSpawner : MonoBehaviour
             if(!wordCompleted)
             {
                 wordCompleted = true;
+
+                if(TracingDisplay != null)
+                {
+                    TracingDisplay.ClearDisplay();
+                }
+
                 GameSession.Score += 1;
 
                 var km = TracingUIManager.GetKhmerTranslation(GameSession.SelectedWord);
-                Debug.Log(km);
+                
                 TracingUIManager.ShowCompletionPanel(GameSession.SelectedWord, km);
 
                 GameSession.JustDelivered = true;

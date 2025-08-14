@@ -10,14 +10,13 @@ public class ScoreDisplay : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (scoreText == null) return;
         if(lastShown != GameSession.Score)
         {
             lastShown = GameSession.Score;  
-            scoreText.text = $"ចំណុច: {GameSession.Score}";
+            scoreText.text = $"ចំណុច: {GameSession.Score}/{GameSession.TargetScoreToWin}";
         }
     }
 }

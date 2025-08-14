@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class TracingUIManager : MonoBehaviour
         if (khmer) khmer.text = khmerTranslation;
     }
 
-    private Dictionary<string, string> khmerTranslations = new Dictionary<string, string>()
+    private Dictionary<string, string> khmerTranslations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
         {"Cat", "ឆ្មា"},
         {"Dog", "ឆ្កែ"},
@@ -30,9 +31,9 @@ public class TracingUIManager : MonoBehaviour
 
     public string GetKhmerTranslation(string englishWord)
     {
-        englishWord = englishWord.ToUpper();
-        if(khmerTranslations.ContainsKey(englishWord))
-            return khmerTranslations[englishWord];
+        if (string.IsNullOrWhiteSpace(englishWord)) return "";
+        if (khmerTranslations.TryGetValue(englishWord.Trim(), out var km) )
+            return km;
         return "";
     }
 

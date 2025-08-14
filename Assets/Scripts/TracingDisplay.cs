@@ -22,6 +22,17 @@ public class TracingDisplay : MonoBehaviour
             spawnedImage.transform.localScale = Vector3.one;
         }
     }
+    public void ClearDisplay()
+    {
+        if (spawnedImage != null)
+        {
+            Destroy(spawnedImage);
+            spawnedImage = null;
+        }
+        if (wordText3D != null)
+            wordText3D.gameObject.SetActive(false);  
+    }
+
 
     // Update is called once per frame
     void Update()

@@ -8,6 +8,8 @@ public class MonsterSceneFlow : MonoBehaviour
     public UIManager manager;
     public Transform itemBesideMonster;
 
+    public GameObject winPanel;
+    public int targetScoreToWin = 2;
     private GameObject spawnedDeliveredItem;
 
     IEnumerator Start()
@@ -18,6 +20,9 @@ public class MonsterSceneFlow : MonoBehaviour
             yield return StartCoroutine(PlayDeliveryThanks());
             GameSession.JustDelivered = false;
             GameSession.SelectedWordPrefab = null;
+
+            if(winPanel != null && winPanel.activeSelf)
+                yield break;
         }
 
         yield return StartCoroutine(monsterWalk.WalkIn());
@@ -41,7 +46,13 @@ public class MonsterSceneFlow : MonoBehaviour
 
         manager.HideSpeech();
         yield return StartCoroutine(monsterWalk.WalkOut());
-        
+
+        if (GameSession.Score >= targetScoreToWin)
+        {
+            if(winPanel) winPanel.SetActive(true);
+            GameSession.InputLocked = true;
+            yield break;
+        }       
 
         if (spawnedDeliveredItem != null) Destroy(spawnedDeliveredItem);
 
