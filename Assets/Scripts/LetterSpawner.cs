@@ -6,6 +6,7 @@ public class LetterSpawner : MonoBehaviour
     public GameObject[] letterPrefabs;
     public TraceManager TraceManager;
     public TracingUIManager TracingUIManager;
+    public WordSFX wordSFX;
     public Transform spawnLocation;
     public TracingDisplay TracingDisplay;
     private GameObject currentLetter;
@@ -38,6 +39,7 @@ public class LetterSpawner : MonoBehaviour
             if(!wordCompleted)
             {
                 wordCompleted = true;
+                wordSFX?.PlayWordComplete();
 
                 if(TracingDisplay != null)
                 {

@@ -15,6 +15,7 @@ public class TraceManager : MonoBehaviour
     public GameObject markerPrefab;
     public GameObject linePrefab;
     public LetterSpawner LetterSpawner;
+    public WordSFX wordSFX;
     private List<GameObject> drawnLines = new List<GameObject>();
 
     private GameObject currentMarker;
@@ -70,7 +71,7 @@ public class TraceManager : MonoBehaviour
         }
         if (index >= strokes.Count)
         {
-            Debug.Log("All strokes complete!");
+            //Debug.Log("All strokes complete!");
             if(currentMarker != null)
             {
                 Destroy(currentMarker);
@@ -134,7 +135,8 @@ public class TraceManager : MonoBehaviour
 
     public void OnStrokeComplete()
     {
-        Debug.Log("Stroke Complete");
+        //Debug.Log("Stroke Complete");
+        wordSFX?.PlayStrokeComplete();
         currentStrokeIndex++;
         StartStroke(currentStrokeIndex);
     }
