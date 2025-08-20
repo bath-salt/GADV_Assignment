@@ -21,8 +21,12 @@ public class TraceManager : MonoBehaviour
     private GameObject currentMarker;
     private LineRenderer currentLine;
     private StrokeCollider currentStroke;
+    public ParticleSystem sparklePrefab;
     private Transform startPoint;
     private Transform endPoint;
+
+    public float nextStrokeDelay = 0.75f;
+    private bool advancingStroke = false;
 
     private List<Vector3> points = new List<Vector3>();
 
@@ -136,8 +140,32 @@ public class TraceManager : MonoBehaviour
     public void OnStrokeComplete()
     {
         //Debug.Log("Stroke Complete");
-        wordSFX?.PlayStrokeComplete();
+        if (advancingStroke)
+        {
+            return;
+        }
+
+        advancingStroke = true;
+
+        if (wordSFX)
+        {
+            wordSFX.PlayStrokeComplete();
+        }
+        if (sparklePrefab)
+        {
+            Vector3 spawnAt = endPoint ? endPoint.position : currentMarker.transform.position;
+            Instantiate(sparklePrefab, spawnAt, Quaternion.identity);
+        }
+
+        StartCoroutine(AdvanceAfterDelay());
+    }
+
+    private System.Collections.IEnumerator AdvanceAfterDelay()
+    {
+        yield return new WaitForSeconds(nextStrokeDelay);
+
         currentStrokeIndex++;
+        advancingStroke=false;
         StartStroke(currentStrokeIndex);
     }
 

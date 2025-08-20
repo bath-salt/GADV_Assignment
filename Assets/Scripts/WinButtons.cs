@@ -35,7 +35,7 @@ public class WinButtons : MonoBehaviour
     public void PlayAgain()
     {
         GameSession.Reset();
-        SceneManager.LoadScene("Monster Requests");
+        SceneManager.LoadScene("MonsterRequests");
     }
     public void GoToTitle()
     {

@@ -15,6 +15,7 @@ public class MonsterRequest : MonoBehaviour
     private WordRequest currentRequest;
 
     public UIManager uimanager;
+    public MonsterRequestSFX monsterRequestSFX;
     void Start()
     {
     }
@@ -29,7 +30,8 @@ public class MonsterRequest : MonoBehaviour
     {
         if (selectedCategory == currentRequest.category)
         {
-            Debug.Log("Correct word is in the right category" + currentRequest.category);
+            // Debug.Log("Correct word is in the right category" + currentRequest.category);
+            monsterRequestSFX?.PlayCorrect();
             GameSession.SelectedWord = currentRequest.words;
             GameSession.SelectedWordPrefab = currentRequest.requestPrefab;
             uimanager.ShowFeedback(true);
@@ -38,7 +40,8 @@ public class MonsterRequest : MonoBehaviour
         }
         else
         {
-            Debug.Log("Incorrect");
+            monsterRequestSFX?.PlayWrong();
+            // Debug.Log("Incorrect");
             uimanager.ShowFeedback(false);
         }
     }

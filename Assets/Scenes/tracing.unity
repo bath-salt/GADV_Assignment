@@ -526,6 +526,7 @@ MonoBehaviour:
   linePrefab: {fileID: 6756085329038951197, guid: 240dc22ae209ce14fb619e22a8d878be, type: 3}
   LetterSpawner: {fileID: 1298887110}
   wordSFX: {fileID: 553639664}
+  sparklePrefab: {fileID: 9188013145618428833, guid: dad0e3e413f0c1648a5e224d555e89a5, type: 3}
 --- !u!1 &392299373
 GameObject:
   m_ObjectHideFlags: 0
