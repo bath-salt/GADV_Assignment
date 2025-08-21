@@ -41,7 +41,11 @@ public class TracingUIManager : MonoBehaviour
         {"Cat", "ឆ្មា"},
         {"Dog", "ឆ្កែ"},
         {"Cow", "គោ" },
-        {"Apple", "ផ្លែប៉ោម" }
+        {"Apple", "ផ្លែប៉ោម" },
+        {"Monkey", "ស្វា" },
+        {"Milk", "តឹកដោហកោ"},
+        {"Rice", "អង្ករ" },
+        {"Bread", "នំបុ័ង" }
     };
 
     public string GetKhmerTranslation(string englishWord)

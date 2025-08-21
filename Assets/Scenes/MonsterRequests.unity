@@ -904,7 +904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &615831921
 Transform:
   m_ObjectHideFlags: 0
@@ -3403,15 +3403,24 @@ MonoBehaviour:
   - words: Cat
     category: Animal
     requestPrefab: {fileID: 2485121936291051909, guid: 9548b4c8f152481489e05bcfde27d2ec, type: 3}
-  - words: Apple
-    category: Food
-    requestPrefab: {fileID: 6742072666457983179, guid: a67b2349a92ae1e4ab58454c23687faf, type: 3}
   - words: Dog
     category: Animal
     requestPrefab: {fileID: 9118729277997851766, guid: de05f0d06fafb83499c5af48572fd063, type: 3}
   - words: Cow
     category: Animal
     requestPrefab: {fileID: 3634633514147078856, guid: 7fdd2183173757645b33f5c408c246db, type: 3}
+  - words: Monkey
+    category: Animal
+    requestPrefab: {fileID: 549538452854390781, guid: ecdbc185028f0314cb916b51fb58e39d, type: 3}
+  - words: Apple
+    category: Food
+    requestPrefab: {fileID: 6742072666457983179, guid: a67b2349a92ae1e4ab58454c23687faf, type: 3}
+  - words: 'Milk '
+    category: Food
+    requestPrefab: {fileID: 3255420762151653609, guid: eabfdcc31c42ec3409b5b77e8f484df5, type: 3}
+  - words: Rice
+    category: Food
+    requestPrefab: {fileID: 3686472297712265422, guid: ded074f954ca58249946216ee83477ef, type: 3}
   uimanager: {fileID: 184323744}
   monsterRequestSFX: {fileID: 1440743129}
 --- !u!4 &1596812366
