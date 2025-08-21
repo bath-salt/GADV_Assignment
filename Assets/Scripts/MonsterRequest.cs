@@ -6,7 +6,7 @@ public class MonsterRequest : MonoBehaviour
     [System.Serializable]
     public class WordRequest
     {
-        public string words;
+        public string words;                    
         public string category;
         public GameObject requestPrefab;
     }
@@ -16,18 +16,18 @@ public class MonsterRequest : MonoBehaviour
 
     public UIManager uimanager;
     public MonsterRequestSFX monsterRequestSFX;
-    void Start()
-    {
-    }
 
     public void GiveRandomRequest()
     {
+        // pick one request at randome
         currentRequest = wordRequests[Random.Range(0, wordRequests.Count)];
         uimanager.ShowMonsterRequest(currentRequest.requestPrefab);
     }
 
     public void OnCategoryChosen(string selectedCategory)
     {
+        // check if category chosen is correct and the loads the tracing scene with the correct word
+        // shows player character's thought bubble saying thats correct in khmer
         if (selectedCategory == currentRequest.category)
         {
             // Debug.Log("Correct word is in the right category" + currentRequest.category);
@@ -40,6 +40,7 @@ public class MonsterRequest : MonoBehaviour
         }
         else
         {
+            // if wrong, play a different sfx and show different thought bubble message
             monsterRequestSFX?.PlayWrong();
             // Debug.Log("Incorrect");
             uimanager.ShowFeedback(false);

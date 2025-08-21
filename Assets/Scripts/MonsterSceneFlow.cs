@@ -14,25 +14,36 @@ public class MonsterSceneFlow : MonoBehaviour
 
     IEnumerator Start()
     {
-        if (manager != null) manager.requestBubble.SetActive(false);
+        // hide request UI until the monster has finished all animations
+        if (manager != null)
+        {
+            manager.requestBubble.SetActive(false);
+        }
+
+        // if we came from tracing scene, play a short "thank you" speech bubble and
+        // display the word that player just traced
         if(GameSession.JustDelivered && GameSession.SelectedWordPrefab != null)
         {
             yield return StartCoroutine(PlayDeliveryThanks());
             GameSession.JustDelivered = false;
             GameSession.SelectedWordPrefab = null;
 
+            // if the we win, stop everything
             if(winPanel != null && winPanel.activeSelf)
                 yield break;
         }
 
+        // normal loop, monster will talk back into frame and give another request
         yield return StartCoroutine(monsterWalk.WalkIn());
         monsterRequest.GiveRandomRequest();
     }
     
     IEnumerator PlayDeliveryThanks()
     {
+        // ensure that the monster is present before we show the delivered item and dialogue 
         yield return StartCoroutine(monsterWalk.WalkIn());
 
+        // replace any previous props so it doesnt stack images next to the monster
         if (spawnedDeliveredItem != null) Destroy(spawnedDeliveredItem);
         spawnedDeliveredItem = Instantiate(GameSession.SelectedWordPrefab, itemBesideMonster.position, Quaternion.identity, itemBesideMonster);
 
@@ -47,6 +58,9 @@ public class MonsterSceneFlow : MonoBehaviour
         manager.HideSpeech();
         yield return StartCoroutine(monsterWalk.WalkOut());
 
+        // after the monster walks off, check to see if the player has won 
+        // if the player won, lock inputs so they do not accidentally interact with other parts
+        // of the scene
         if (GameSession.Score >= targetScoreToWin)
         {
             if(winPanel) winPanel.SetActive(true);

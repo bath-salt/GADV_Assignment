@@ -10,6 +10,7 @@ public class MonsterRequestSFX : MonoBehaviour
     private AudioSource sfx;
     void Awake()
     {
+        // cache the audio source once and configure it for 2D playback (spatial blend 0)
         sfx = GetComponent<AudioSource>();
         sfx.playOnAwake = false;
         sfx.spatialBlend = 0f;

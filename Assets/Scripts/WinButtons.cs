@@ -8,7 +8,14 @@ public class WinButtons : MonoBehaviour
 
     void Update()
     {
-        if (!gameObject.activeInHierarchy) return;
+        // skips checks if this button isnt active in the hierarchy
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        // onlyn handle the first active touch, and only at the "Bega" phase
+        // prevents multiple triggers while finger is held"
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -17,6 +24,7 @@ public class WinButtons : MonoBehaviour
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
             Collider2D hit = Physics2D.OverlapPoint(worldPos);
 
+            // trigger only if this exact button's collider was tapped
             if (hit != null && hit.gameObject == gameObject)
             {
                 switch(action)

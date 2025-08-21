@@ -7,7 +7,11 @@ public class CategoryButton : MonoBehaviour
 
     private void Update()
     {
-        if (GameSession.InputLocked) return;
+        // Ignore input if a global lock is active (e.g when win screen is showing, I do not want players accidentally pressing these buttons)
+        if (GameSession.InputLocked)
+        {
+            return;
+        }
 
         if(Input.touchCount > 0)
         {
@@ -15,6 +19,10 @@ public class CategoryButton : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
+                // convrets the screen touch position into world space,
+                // because Physics2D.overlapPoint works in world space coordinaes
+                // I then check if the touch landed onn any colliders in the scene,
+                // determining whether the tap interacts with something. 
                 Vector2 touchWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
                 Collider2D hit = Physics2D.OverlapPoint(touchWorldPos);
 
@@ -27,6 +35,7 @@ public class CategoryButton : MonoBehaviour
                     Debug.Log("Hit nothing");
                 }
 
+                // Only responds if the tap was on this specific button, not just any collider
                 if (hit != null && hit.gameObject == gameObject)
                 {
                     Debug.Log($"Tapped: {CategoryName}");

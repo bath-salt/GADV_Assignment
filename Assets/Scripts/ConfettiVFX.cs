@@ -6,6 +6,9 @@ public class ConfettiVFX : MonoBehaviour
 
     private void OnEnable()
     {
+        // Only fetch the ParticleSystem once (the first time it is enabled)
+        // This avoids repeated GetComponent calls every time the object is re enabled
+        // I clear it first to enable no leftover particles remain from a previous play session 
         if (!ps)
         {
             ps = GetComponent<ParticleSystem>();

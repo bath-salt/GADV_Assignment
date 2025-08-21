@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public TextMeshPro speechText;
     public void ShowMonsterRequest(GameObject prefabToSpawn)
     {
+        // replace any existing request image so only one prompt is visible at a time
         if(currentRequestImage != null)
         {
             Destroy(currentRequestImage);
@@ -33,13 +34,25 @@ public class UIManager : MonoBehaviour
 
     public void ShowSpeech(string message)
     {
-        if (requestBubble != null) requestBubble.SetActive(true);
-        if (speechText != null) speechText.text = message;
+        if (requestBubble != null)
+        {
+            requestBubble.SetActive(true);
+        }
+        if (speechText != null)
+        {
+            speechText.text = message;
+        }
     }
 
     public void HideSpeech()
     {
-        if(requestBubble != null) requestBubble.SetActive(false);
-        if(speechText != null) speechText.gameObject.SetActive(false);
+        if(requestBubble != null)
+        {
+            requestBubble.SetActive(false);
+        }
+        if(speechText != null)
+        {
+            speechText.gameObject.SetActive(false);
+        }
     }
 }

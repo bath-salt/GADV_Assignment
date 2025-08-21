@@ -3,6 +3,9 @@ using UnityEngine;
 
 public static class GameSession
 {
+    // global state holder for my game
+    // stores persistent information like word selected score so 
+    // multiple scripts across diff scenes can share context
     public static string SelectedWord;
     public static GameObject SelectedWordPrefab;
     public static bool InputLocked;
@@ -12,10 +15,16 @@ public static class GameSession
 
     public static int Score = 0;
 
+    // used enum to ensure no invalid values (type safety over raw ints)
+    // explicit numeric values to ensure difficulty saves/loads consistently from playerprefs
     public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 }
+
+    // default to medium so the game starts in a valid known state
     public static Difficulty CurrentDifficulty { get; private set; } = Difficulty.Medium;
+
     public static int TargetScoreToWin { get; private set; } = 4;
 
+    // target sscore is tied to difficulty chosen
     public static void SetDifficulty(Difficulty d)
     {
         CurrentDifficulty = d;
@@ -31,6 +40,9 @@ public static class GameSession
         PlayerPrefs.Save();
     }
 
+    // if the player has set a difficulty before, reloat it
+    // for my play again feature
+    // otherwise defualt to medium
     public static void LoadDifficultyOrDefault()
     {
         if(PlayerPrefs.HasKey("difficulty"))
@@ -38,6 +50,9 @@ public static class GameSession
         else
             SetDifficulty(Difficulty.Medium);
     }
+
+    // called when starting a new session
+    // Resets scores and selections so no state leaks over
     public static void Reset()
     {
         Score = 0;
